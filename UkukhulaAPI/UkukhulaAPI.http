@@ -1,0 +1,6 @@
+@UkukhulaAPI_HostAddress = http://localhost:5263
+
+GET {{UkukhulaAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
