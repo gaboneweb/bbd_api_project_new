@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UkukhulaAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e8a381f2ef690cb306f1a29137d85c4ee82b93df")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+632d55f6e0cb077ef8519147326c4794d63fb459")]
 [assembly: System.Reflection.AssemblyProductAttribute("UkukhulaAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UkukhulaAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
