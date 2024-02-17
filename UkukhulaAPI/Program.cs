@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using UkukhulaAPI.Data.Models;
+using UkukhulaAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
