@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace UkukhulaAPI.Models;
+namespace UkukhulaAPI.Data.Models;
 
 public partial class UkukhulaContext : DbContext
 {
