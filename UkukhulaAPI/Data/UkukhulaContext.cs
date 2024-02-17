@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using UkukhulaAPI.Data.Models;
 
-namespace UkukhulaAPI.Data.Models;
+namespace UkukhulaAPI.Data;
 
 public partial class UkukhulaContext : DbContext
 {

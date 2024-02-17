@@ -1,5 +1,5 @@
 using System;
-using UkukhulaAPI.Data.Models;
+using UkukhulaAPI.Data;
 using UkukhulaAPI.Data.Models.View;
 
 namespace UkukhulaAPI.Data.Services;
@@ -14,7 +14,7 @@ public class UsersService
 
     public void AddUser(UserVm user)
     {
-        
+
 
     }
 }
