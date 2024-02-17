@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UkukhulaAPI.Models;
+namespace UkukhulaAPI.Data.Models;
 
 public partial class Contact
 {
