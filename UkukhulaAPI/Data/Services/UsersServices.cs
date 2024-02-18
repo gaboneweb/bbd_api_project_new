@@ -1,13 +1,4 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Identity.Client;
-using Microsoft.IdentityModel.Tokens;
-using UkukhulaAPI.Data;
-using System.Linq;
+
 using UkukhulaAPI.Data.Models;
 using UkukhulaAPI.Data.Models.View;
 
