@@ -14,8 +14,7 @@ namespace UkukhulaAPI.Data.Models.View
         public string StudentUniversity { get; set; }
         public string CourseOfStudy { get; set; }
         public string race { get; set; }
-        // public decimal YearBudget { get; set; }
-        // public decimal CapAmountPerStudent { get; set; }
+    
         public string Status { get; set; }
         public string Department { get; set; }
         public string HeadOfDepartmentUniversity { get; set; }
