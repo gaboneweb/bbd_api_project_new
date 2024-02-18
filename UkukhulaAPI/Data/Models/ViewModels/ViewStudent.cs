@@ -11,7 +11,7 @@
 
         public ViewDepartment Department { get; set; }
 
-        public ViewUniveristy Univeristy { get; set; }
+        public ViewUniversity Univeristy { get; set; }
 
         public ViewStudentDocuments Documents { get; set; }
 
