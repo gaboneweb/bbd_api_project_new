@@ -25,5 +25,7 @@ public partial class Student
 
     public virtual StudentBursaryDocument? StudentBursaryDocument { get; set; }
 
+    public virtual University University { get; set; } = null!;
+
     public virtual User User { get; set; } = null!;
 }

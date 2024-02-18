@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,18 +20,26 @@ namespace UkukhulaAPI.Controllers
         /*private readonly UkukhulaContext _context;*/
         private ApplicationService applicationService;
 
-        public ApplicationsController(ApplicationService applicationService)
+        private readonly IMapper _mapper;
+
+        public ApplicationsController(ApplicationService applicationService,IMapper mapper)
         {
 
             this.applicationService = applicationService;
+            this._mapper = mapper;
         }
 
         // GET: api/Applications
         [HttpGet]
-        public ActionResult<vStudentAppliation> GetStudentBursaryApplications()
+        public ActionResult<vStudentApplication> GetStudentBursaryApplications()
         {
-            
-            return Ok(applicationService.GetStudentBursaryApplications());
+
+            List<vStudentApplication> vStudents = new List<vStudentApplication>(); ;
+            foreach (var StudentApp in applicationService.GetStudentBursaryApplications())
+            {
+                vStudents.Add(_mapper.Map<vStudentApplication>(StudentApp));
+            }
+            return Ok(vStudents);
         }
 
 

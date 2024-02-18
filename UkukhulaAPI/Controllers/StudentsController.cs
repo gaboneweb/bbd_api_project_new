@@ -32,7 +32,7 @@ namespace UkukhulaAPI.Controllers
         {
 
             List<vStudent>  vStudents = new List<vStudent>(); ;
-            foreach(var vStudent in _context.Students.ToList())
+            foreach(var vStudent in _context.Students.Include(stud => stud.StudentBursaryDocument).Include(stud => stud.University).ToList())
             {
                 vStudents.Add(_mapper.Map<vStudent>(vStudent));
             }
