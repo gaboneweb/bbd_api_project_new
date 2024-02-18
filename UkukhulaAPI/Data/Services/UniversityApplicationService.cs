@@ -55,5 +55,26 @@ namespace UkukhulaAPI.Data.Services
             _context.Add(_universityApplication);
             _context.SaveChanges();
         }
+
+        public UniversityStatusVM GetUniversityApplicationStatusByUniversityName(string universityName)
+        {
+            var university = _context.University.FirstOrDefault(n => n.UniversityName == universityName);
+            var universityId = university.UniversityId;
+            
+            var universityApplication = _context.UniversityApplication.FirstOrDefault(n => n.UniversityId == universityId);
+            var reviewerComment = universityApplication.ReviewerComment;
+            var statusId = universityApplication.StatusId;
+
+            var applicationStatus = _context.ApplicationStatus.FirstOrDefault(n => n.StatusId == statusId);
+            var status = applicationStatus.Status;
+
+            var _universityStatus = new UniversityStatusVM()
+            {
+                Status = status,
+                ReviewerComment = reviewerComment
+            };
+
+            return _universityStatus;
+        }
     }
 }

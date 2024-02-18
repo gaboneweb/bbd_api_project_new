@@ -29,5 +29,12 @@ namespace UkukhulaAPI.Controllers
             return Ok();
         }
 
+        [HttpGet("get-application-status/{universityName}")]
+        public IActionResult GetUniversityApplicationStatusByUniversityName(string universityName)
+        {
+            var universityStatus = _universityApplicationService.GetUniversityApplicationStatusByUniversityName(universityName);
+            return Ok(universityStatus);
+        }
+
     }
 }

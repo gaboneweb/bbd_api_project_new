@@ -22,6 +22,7 @@ public partial class UkukhulaContext : DbContext
 //        
 //     }
     public virtual DbSet<ApplicationStatus> ApplicationStatuses { get; set; }
+    public virtual DbSet<ApplicationStatus> ApplicationStatus { get; set; }
 
     public virtual DbSet<Bbdadministrator> Bbdadministrators { get; set; }
 
@@ -44,6 +45,7 @@ public partial class UkukhulaContext : DbContext
     public virtual DbSet<University> University { get; set; }
 
     public virtual DbSet<UniversityApplication> UniversityApplications { get; set; }
+    public virtual DbSet<UniversityApplication> UniversityApplication { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
