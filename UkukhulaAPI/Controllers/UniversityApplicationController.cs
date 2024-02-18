@@ -1,21 +1,33 @@
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UkukhulaAPI.Data.Services;
+using UkukhulaAPI.Data.Models.ViewModels;
+using UkukhulaAPI.Data.Models.View;
 using UkukhulaAPI.Data;
+using UkukhulaAPI.Controllers;
+
 
 namespace UkukhulaAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UniversityApplicationController: ControllerBase
+    
+    public class UniversityApplicationController : ControllerBase
     {
-        UkukhulaContext _ukukhulaContext;
-        public UniversityApplicationController(UkukhulaContext ukukhulaContext){
-            _ukukhulaContext = ukukhulaContext;
-        }
-        [HttpGet]
-        public IActionResult GetUniversityApplications()
+        public UniversityApplicationService _universityApplicationService;
+
+        public UniversityApplicationController(UniversityApplicationService universityApplicationService)
         {
-            return Ok (_ukukhulaContext.UniversityApplications.ToArray());
+            _universityApplicationService = universityApplicationService ;
         }
+
+        [HttpPost("apply-university")]
+        public IActionResult ApplyAsUniversity([FromBody]  UniversityApplicationVM universityApplication)
+        {
+            _universityApplicationService.ApplyAsUniversity(universityApplication);
+            return Ok();
+        }
+
     }
 }

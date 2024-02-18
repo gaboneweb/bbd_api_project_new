@@ -28,6 +28,7 @@ public partial class UkukhulaContext : DbContext
     public virtual DbSet<Contact> Contacts { get; set; }
 
     public virtual DbSet<Department> Departments { get; set; }
+    public virtual DbSet<Department> Department { get; set; }
 
     public virtual DbSet<HeadOfDepartment> HeadOfDepartments { get; set; }
 
@@ -40,6 +41,7 @@ public partial class UkukhulaContext : DbContext
     public virtual DbSet<StudentBursaryDocument> StudentBursaryDocuments { get; set; }
 
     public virtual DbSet<University> Universities { get; set; }
+    public virtual DbSet<University> University { get; set; }
 
     public virtual DbSet<UniversityApplication> UniversityApplications { get; set; }
 
