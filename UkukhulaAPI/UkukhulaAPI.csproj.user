@@ -12,4 +12,5 @@
     <WebStackScaffolding_DbContextTypeFullName>UkukhulaAPI.Data.UkukhulaContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
   </PropertyGroup>
+  
 </Project>

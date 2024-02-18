@@ -5,6 +5,11 @@ namespace UkukhulaAPI.Data.Models;
 
 public partial class Department
 {
+    public Department()
+    {
+        HeadOfDepartments = new HashSet<HeadOfDepartment>();
+        Students = new HashSet<Student>();
+    }
     public int DepartmentId { get; set; }
 
     public string DepartmentName { get; set; } = null!;
