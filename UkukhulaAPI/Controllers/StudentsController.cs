@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,20 +28,20 @@ namespace UkukhulaAPI.Controllers
 
         // GET: api/Students
         [HttpGet]
-        public ActionResult<IEnumerable<vStudent>> GetStudents()
+        public ActionResult<IEnumerable<ViewStudent>> GetStudents()
         {
 
-            List<vStudent>  vStudents = new List<vStudent>(); ;
-            foreach(var vStudent in _context.Students.ToList())
+            List<ViewStudent>  vStudents = new List<ViewStudent>(); ;
+            foreach(var vStudent in _context.Students.Include(stud => stud.StudentBursaryDocument).Include(stud => stud.University).ToList())
             {
-                vStudents.Add(_mapper.Map<vStudent>(vStudent));
+                vStudents.Add(_mapper.Map<ViewStudent>(vStudent));
             }
             return vStudents;
         }
 
         // GET: api/Students/5
         [HttpGet("{id}")]
-        public ActionResult<vStudent> GetStudent(int id)
+        public ActionResult<ViewStudent> GetStudent(int id)
         {
             var student = _context.Students.Find(id);
 
@@ -50,7 +50,7 @@ namespace UkukhulaAPI.Controllers
                 return NotFound();
             }
 
-            var returnStudent = _mapper.Map<vStudent>(student);
+            var returnStudent = _mapper.Map<ViewStudent>(student);
 
             return returnStudent;
         }

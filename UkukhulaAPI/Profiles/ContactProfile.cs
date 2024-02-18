@@ -7,7 +7,7 @@ namespace UkukhulaAPI.Profiles
     public class ContactProfile : Profile
     {
         public ContactProfile() {
-            CreateMap<Contact, vContact>();      
+            CreateMap<Contact, ViewContact>();      
         }
     }
 }

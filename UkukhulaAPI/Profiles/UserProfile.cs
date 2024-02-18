@@ -9,7 +9,7 @@ namespace UkukhulaAPI.Profiles
     public class UserProfile : Profile
     {
         public UserProfile() {
-            CreateMap<User, vUser>();
+            CreateMap<User, ViewUser>();
         }
     }
 }

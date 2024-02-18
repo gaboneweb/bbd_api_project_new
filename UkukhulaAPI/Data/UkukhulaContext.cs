@@ -59,10 +59,6 @@ public partial class UkukhulaContext : DbContext
         var connectionString = configuration.GetConnectionString("DBConnectionString");
 
         optionsBuilder.UseSqlServer(connectionString);
-        //  optionsBuilder.UseLazyLoadingProxies();
-
-        optionsBuilder.UseLazyLoadingProxies().UseSqlServer(connectionString);
-
     }
 
 protected override void OnModelCreating(ModelBuilder modelBuilder)

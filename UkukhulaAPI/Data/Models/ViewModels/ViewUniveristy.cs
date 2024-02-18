@@ -1,6 +1,6 @@
 ﻿namespace UkukhulaAPI.Data.Models.ViewModels
 {
-    public class vUniveristy
+    public class ViewUniveristy
     {
         public int UniversityId { get; set; }
 

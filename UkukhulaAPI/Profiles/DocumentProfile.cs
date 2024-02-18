@@ -4,10 +4,10 @@ using UkukhulaAPI.Data.Models.ViewModels;
 
 namespace UkukhulaAPI.Profiles
 {
-    public class DepartmentProfile : Profile
+    public class DocumentProfile: Profile
     {
-        public DepartmentProfile() {
-            CreateMap<Department, ViewDepartment>();
+        public DocumentProfile() {
+            CreateMap<StudentBursaryDocument, ViewStudentDocuments>();
         }
     }
 }

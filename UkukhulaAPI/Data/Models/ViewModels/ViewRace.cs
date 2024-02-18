@@ -1,6 +1,6 @@
 ﻿namespace UkukhulaAPI.Data.Models.ViewModels
 {
-    public class vRace
+    public class ViewRace
     {
         public int RaceId { get; set; }
 

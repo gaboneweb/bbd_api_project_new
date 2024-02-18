@@ -1,6 +1,6 @@
 ﻿namespace UkukhulaAPI.Data.Models.ViewModels
 {
-    public class vUser
+    public class ViewUser
     {
         public int UserId { get; set; }
 
@@ -10,6 +10,6 @@
 
         public string Idnumber { get; set; } = null!;
 
-        public vContact Contact { get; set; }
+        public ViewContact Contact { get; set; }
     }
 }
