@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using UkukhulaAPI.Data.Models;
 
+using static UkukhulaAPI.Data.Services.UsersService;
+
 namespace UkukhulaAPI.Data;
 
 public partial class UkukhulaContext : DbContext
@@ -15,7 +17,10 @@ public partial class UkukhulaContext : DbContext
         : base(options)
     {
     }
-
+// protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//     {
+//        
+//     }
     public virtual DbSet<ApplicationStatus> ApplicationStatuses { get; set; }
 
     public virtual DbSet<Bbdadministrator> Bbdadministrators { get; set; }
@@ -53,6 +58,7 @@ public partial class UkukhulaContext : DbContext
 
         var connectionString = configuration.GetConnectionString("DBConnectionString");
         optionsBuilder.UseSqlServer(connectionString);
+        //  optionsBuilder.UseLazyLoadingProxies();
     }
 
 protected override void OnModelCreating(ModelBuilder modelBuilder)
