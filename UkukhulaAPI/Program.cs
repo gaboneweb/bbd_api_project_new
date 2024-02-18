@@ -43,6 +43,11 @@ builder.Services.AddTransient<BbdadministratorService>();
 
 builder.Services.AddTransient<ApplicationService>();
 
+builder.Services.AddTransient<StudentService>();
+
+
+builder.Services.AddTransient<UniversityService>();
+
 
 
 var app = builder.Build();
