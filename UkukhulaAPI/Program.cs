@@ -38,6 +38,7 @@ builder.Services.AddDbContext<UkukhulaContext>(x => x.UseSqlServer(connectionStr
 
 builder.Services.AddTransient<UsersService>();
 builder.Services.AddTransient<NewApplicationService>();
+builder.Services.AddTransient<BbdadministratorService>();
 
 
 builder.Services.AddTransient<ApplicationService>();
