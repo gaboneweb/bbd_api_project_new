@@ -47,7 +47,7 @@ namespace UkukhulaAPI.Controllers
             }
 
 
-            return Ok();
+            return Ok(universityAllocations);
         }
 
         public IActionResult Index()
