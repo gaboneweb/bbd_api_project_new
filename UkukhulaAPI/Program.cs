@@ -42,6 +42,8 @@ builder.Services.AddTransient<NewApplicationService>();
 
 builder.Services.AddTransient<ApplicationService>();
 
+builder.Services.AddTransient<StudentService>();
+
 
 
 var app = builder.Build();
