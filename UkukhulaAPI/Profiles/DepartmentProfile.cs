@@ -7,7 +7,7 @@ namespace UkukhulaAPI.Profiles
     public class DepartmentProfile : Profile
     {
         public DepartmentProfile() {
-            CreateMap<Department, vDepartment>();
+            CreateMap<Department, ViewDepartment>();
         }
     }
 }

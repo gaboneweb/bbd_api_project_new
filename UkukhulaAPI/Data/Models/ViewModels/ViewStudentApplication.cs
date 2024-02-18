@@ -1,6 +1,6 @@
 ﻿ namespace UkukhulaAPI.Data.Models.ViewModels
 {
-    public class vStudentApplication
+    public class ViewStudentApplication
     {
         public int ApplicationId { get; set; }
 
@@ -12,11 +12,11 @@
 
         public int BursaryDetailsID { get; set; }
 
-        public vStudent Student { get; set; } = null!;
+        public ViewStudent Student { get; set; } = null!;
 
-        public vApplicationStatus ApplicationStatus { get; set; }
+        public ViewApplicationStatus ApplicationStatus { get; set; } = null!;
 
-        public vHeadOfDepartment HeadOfDepartment { get; set; }
+        public ViewHeadOfDepartment HeadOfDepartment { get; set; } = null!;
 
 
 

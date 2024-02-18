@@ -7,7 +7,7 @@ namespace UkukhulaAPI.Profiles
     public class ApplicationStatusProfile : Profile
     {
         public ApplicationStatusProfile() {
-            CreateMap<ApplicationStatus, vApplicationStatus>()
+            CreateMap<ApplicationStatus, ViewApplicationStatus>()
                 .ForMember(dest => dest.StatusId, src => src.MapFrom( app => app.StatusId))
                 .ForMember(dest => dest.Status, src => src.MapFrom(app => app.Status));
         }

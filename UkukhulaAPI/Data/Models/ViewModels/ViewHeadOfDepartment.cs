@@ -1,8 +1,8 @@
 ﻿namespace UkukhulaAPI.Data.Models.ViewModels
 {
-    public class vHeadOfDepartment
+    public class ViewHeadOfDepartment
     {
-        public vUser User { get; set; } = null!;
+        public ViewUser User { get; set; } = null!;
         public int HeadOfDepartmentId { get; set; }
 
     }

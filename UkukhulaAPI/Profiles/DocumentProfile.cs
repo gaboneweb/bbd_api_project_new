@@ -7,7 +7,7 @@ namespace UkukhulaAPI.Profiles
     public class DocumentProfile: Profile
     {
         public DocumentProfile() {
-            CreateMap<StudentBursaryDocument, vStudentDocuments>();
+            CreateMap<StudentBursaryDocument, ViewStudentDocuments>();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace UkukhulaAPI.Data.Models.ViewModels
 {
-    public class vDepartment
+    public class ViewDepartment
     {
         public int DepartmentId { get; set; }
 

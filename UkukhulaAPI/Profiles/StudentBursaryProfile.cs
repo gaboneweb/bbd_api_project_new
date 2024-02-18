@@ -7,7 +7,7 @@ namespace UkukhulaAPI.Profiles
     public class StudentBursaryProfile: Profile
     {
         public StudentBursaryProfile() {
-            CreateMap<StudentBursaryApplication, vStudentApplication>();
+            CreateMap<StudentBursaryApplication, ViewStudentApplication>();
         }
     }
 }

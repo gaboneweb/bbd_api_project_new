@@ -7,7 +7,7 @@ namespace UkukhulaAPI.Profiles
     public class RaceProfile : Profile
     {
         public RaceProfile() {
-            CreateMap<Race, vRace>();
+            CreateMap<Race, ViewRace>();
         }
     }
 }

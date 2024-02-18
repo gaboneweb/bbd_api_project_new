@@ -1,6 +1,6 @@
 ﻿namespace UkukhulaAPI.Data.Models.ViewModels
 {
-    public class vApplicationStatus
+    public class ViewApplicationStatus
     {
         public int StatusId { get; set; }
 

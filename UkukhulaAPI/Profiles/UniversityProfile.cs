@@ -8,7 +8,7 @@ namespace UkukhulaAPI.Profiles
     {
         public UniversityProfile()
         {
-            CreateMap<University,vUniveristy>()
+            CreateMap<University,ViewUniveristy>()
                 .ForMember(dest => dest.UniversityId,
                  src => src.MapFrom(Id => Id.UniversityId))
                 .ForMember(dest => dest.UniversityName,
