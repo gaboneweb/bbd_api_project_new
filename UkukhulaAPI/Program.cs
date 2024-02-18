@@ -1,7 +1,13 @@
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
+
 using UkukhulaAPI.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using UkukhulaAPI.Data.Services;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
+
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +21,27 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
+    options.TokenValidationParameters = new TokenValidationParameters {
+        ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+});
+
 var connectionString = builder.Configuration.GetConnectionString("DBConnectionString");
 builder.Services.AddDbContext<UkukhulaContext>(x => x.UseSqlServer(connectionString));
 
+builder.Services.AddTransient<UsersService>();
+builder.Services.AddTransient<ApplicationsService>();
+
+
 builder.Services.AddTransient<ApplicationService>();
+
 
 
 var app = builder.Build();
@@ -32,6 +55,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
