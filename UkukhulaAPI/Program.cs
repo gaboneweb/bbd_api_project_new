@@ -22,14 +22,15 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
-    options.TokenValidationParameters = new TokenValidationParameters {
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
         ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
 
@@ -37,11 +38,17 @@ var connectionString = builder.Configuration.GetConnectionString("DBConnectionSt
 builder.Services.AddDbContext<UkukhulaContext>(x => x.UseSqlServer(connectionString));
 
 builder.Services.AddTransient<UsersService>();
+
 builder.Services.AddTransient<NewApplicationService>();
 builder.Services.AddTransient<BbdadministratorService>();
 
 
+
 builder.Services.AddTransient<ApplicationService>();
+
+
+builder.Services.AddTransient<UniversityApplicationService>();
+builder.Services.AddTransient<HeadOfDepartmentService>();
 
 builder.Services.AddTransient<StudentService>();
 
@@ -58,6 +65,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
