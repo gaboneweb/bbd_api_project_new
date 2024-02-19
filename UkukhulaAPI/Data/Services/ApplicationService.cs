@@ -38,20 +38,20 @@ namespace UkukhulaAPI.Data.Services
         {
             List<StudentBursaryApplication>? studentBursaryApplications = _context.StudentBursaryApplications
                                                                         .Include(app => app.Student)
-                                                                            .ThenInclude(app => app.User)
-                                                                                .ThenInclude(app => app.Contact)
+                                                                            .ThenInclude(student => student.User)
+                                                                                .ThenInclude(user => user.Contact)
                                                                         .Include(app => app.Student)
-                                                                            .ThenInclude(app => app.Department)
+                                                                            .ThenInclude(student => student.Department)
                                                                         .Include(app => app.Student)
-                                                                            .ThenInclude(app => app.University)
+                                                                            .ThenInclude(student => student.University)
                                                                         .Include(app => app.Student)
-                                                                            .ThenInclude(app => app.StudentBursaryDocument)
+                                                                            .ThenInclude(student => student.StudentBursaryDocument)
                                                                         .Include(app => app.Student)
-                                                                            .ThenInclude(app => app.Race)
+                                                                            .ThenInclude(student => student.Race)
                                                                         .Include(app => app.HeadOfDepartment)
-                                                                            .ThenInclude (app => app.User)
+                                                                            .ThenInclude (headOfDepartment => headOfDepartment.User)
                                                                                 .ThenInclude(app => app.Contact)
-                                                                        .Include(app => app.Status)
+                                                                        .Include(user => user.Status)
                                                                         .ToList();
 
             return studentBursaryApplications.IsNullOrEmpty() ? new List<StudentBursaryApplication>() : studentBursaryApplications ;
@@ -85,24 +85,24 @@ namespace UkukhulaAPI.Data.Services
 
         public List<StudentBursaryApplication> GetApplicationForUniversityInYear(int universityID, int yearOfBursary,string status) {
             List<StudentBursaryApplication>? studentBursaryApplications = _context.StudentBursaryApplications
-                                                                       .Include(app => app.Student)
-                                                                           .ThenInclude(app => app.User)
-                                                                               .ThenInclude(app => app.Contact)
-                                                                       .Include(app => app.Student)
-                                                                           .ThenInclude(app => app.Department)
-                                                                       .Include(app => app.Student)
+                                                                       .Include(application => application.Student)
+                                                                           .ThenInclude(student => student.User)
+                                                                               .ThenInclude(user => user.Contact)
+                                                                       .Include(application => application.Student)
+                                                                           .ThenInclude(student => student.Department)
+                                                                       .Include(application => application.Student)
                                                                            .ThenInclude(app => app.University)
-                                                                       .Include(app => app.Student)
-                                                                           .ThenInclude(app => app.StudentBursaryDocument)
-                                                                       .Include(app => app.Student)
-                                                                           .ThenInclude(app => app.Race)
-                                                                       .Include(app => app.HeadOfDepartment)
-                                                                           .ThenInclude(app => app.User)
-                                                                               .ThenInclude(app => app.Contact)
-                                                                       .Include(app => app.Status)
-                                                                       .Where(app => app.Student.UniversityId == universityID 
-                                                                                      && app.BursaryDetailsId == yearOfBursary 
-                                                                                      && app.Status.Status.ToLower().Equals(status.ToLower()))
+                                                                       .Include(application => application.Student)
+                                                                           .ThenInclude(student => student.StudentBursaryDocument)
+                                                                       .Include(application => application.Student)
+                                                                           .ThenInclude(student => student.Race)
+                                                                       .Include(application => application.HeadOfDepartment)
+                                                                           .ThenInclude(headOfDepartment => headOfDepartment.User)
+                                                                               .ThenInclude(user => user.Contact)
+                                                                       .Include(application => application.Status)
+                                                                       .Where(application => application.Student.UniversityId == universityID 
+                                                                                      && application.BursaryDetailsId == yearOfBursary 
+                                                                                      && application.Status.Status.ToLower().Equals(status.ToLower()))
                                                                        .ToList();
 
             return studentBursaryApplications.IsNullOrEmpty() ? new List<StudentBursaryApplication>() : studentBursaryApplications;

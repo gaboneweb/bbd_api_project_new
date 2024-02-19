@@ -17,12 +17,12 @@ namespace UkukhulaAPI.Data.Services
         {
 
             List<Student> students = _context.Students
-                                            .Include(stud => stud.User)
-                                                .ThenInclude(stud => stud.Contact)
-                                            .Include(stud => stud.Race)
-                                            .Include(stud => stud.Department)
-                                            .Include(stud => stud.StudentBursaryDocument)
-                                            .Include(stud => stud.University)
+                                            .Include(student  => student.User)
+                                                .ThenInclude(user => user.Contact)
+                                            .Include(student => student.Race)
+                                            .Include(student => student.Department)
+                                            .Include(student => student.StudentBursaryDocument)
+                                            .Include(student => student.University)
                                             .ToList();
      
             return students;
