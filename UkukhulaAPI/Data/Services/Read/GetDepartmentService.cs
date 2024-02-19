@@ -2,17 +2,16 @@ using UkukhulaAPI.Data.Models;
 using UkukhulaAPI.Data.Models.ViewModels;
 using UkukhulaAPI.Data.Models.View;
 
-namespace UkukhulaAPI.Data.Services
+namespace UkukhulaAPI.Data.Services.Read
 {
-    public class DepartmentService
+    public class GetDepartmentService
     {
         private UkukhulaContext  _context;
 
-        public DepartmentService(UkukhulaContext context)
+        public GetDepartmentService(UkukhulaContext context)
         {
             _context = context;
         }
-
 
 
         public int GetDepartmentIdByDepartmentName(string departmentName)
@@ -40,5 +39,12 @@ namespace UkukhulaAPI.Data.Services
                 return "";
             }
 }
+
+        public List<Department> GetAllDepartments()
+        {
+
+            return _context.Department.ToList();
+
+        }
     }
 }

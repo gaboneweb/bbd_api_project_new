@@ -3,17 +3,38 @@ using UkukhulaAPI.Data.Models.ViewModels;
 using UkukhulaAPI.Data.Models.View;
 using System.Collections.Generic;
 
-namespace UkukhulaAPI.Data.Services
+namespace UkukhulaAPI.Data.Services.Read
 {
-    public class ApplicationStatusService
+    public class GetApplicationStatusService
     {
         private UkukhulaContext _context;
 
-        public ApplicationStatusService(UkukhulaContext context)
+        public GetApplicationStatusService(UkukhulaContext context)
         {
             _context = context;
         }
 
+        public int GetStatusIdByStatus(string status)
+        {
+            var _status = _context.ApplicationStatus.FirstOrDefault(n => n.Status == status);
+            if (_status != null)
+            {
+                return _status.StatusId;
+            }
+
+            return 0;
+        }
+
+        public string GetStatusByStatusId(int statusId)
+        {
+            var _status = _context.ApplicationStatus.FirstOrDefault(n => n.StatusId == statusId);
+            if (_status != null)
+            {
+                return _status.Status;
+            }
+
+            return "";
+        }
 
         public List<ApplicationStatus> GetAllApplicationStatuses()
         {
@@ -53,26 +74,6 @@ namespace UkukhulaAPI.Data.Services
             return dictIDApplicationStatus;
         }
 
-        public int GetStatusIdByStatus(string status)
-        {
-            var _status = _context.ApplicationStatus.FirstOrDefault(n => n.Status == status);
-            if (_status != null)
-            {
-                return _status.StatusId;
-            }
-
-            return 0;
-        }
-
-        public string GetStatusByStatusId(int statusId)
-        {
-            var _status = _context.ApplicationStatus.FirstOrDefault(n => n.StatusId == statusId);
-            if (_status != null)
-            {
-                return _status.Status;
-            }
-
-            return "";
-        }
+ 
     }
 }

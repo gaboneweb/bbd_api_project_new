@@ -24,8 +24,15 @@ namespace UkukhulaAPI.Controllers
         [HttpGet("list-department-bursary-status/{universityName}/{status}")]
         public IActionResult GetListBursaryAmountPerDepartmentUsingUniNameAndStatus(String universityName, String status)
         {
-            var departmentBursaryClaimed = _service.GetListBursaryAmountPerDepartmentUsingUniNameAndStatus(universityName, status);
-            return Ok(departmentBursaryClaimed);
+            var departmentBursary = _service.GetListBursaryAmountPerDepartmentUsingUniNameAndStatus(universityName, status);
+            return Ok(departmentBursary);
+        }
+        
+        [HttpGet("list-student/{universityName}")]
+        public IActionResult GetListUniversityStudents(String universityName)
+        {
+            var listUniversityStudents = _service.GetListUniversityStudents(universityName);
+            return Ok(listUniversityStudents);
         }
 
 
