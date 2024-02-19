@@ -1,12 +1,9 @@
-using Xunit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using UkukhulaAPI.Controllers;
 using UkukhulaAPI.Data;
 using UkukhulaAPI.Data.Models;
 using Moq;
-using System.Collections.Generic;
-using System.Linq;
+
 
 namespace UkukhulaAPI.Tests.Controllers
 {
