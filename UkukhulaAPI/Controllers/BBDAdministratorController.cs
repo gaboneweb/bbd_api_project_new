@@ -28,13 +28,14 @@ namespace UkukhulaAPI.Controllers
         [Route("bbd-admin/fund")]
         public IActionResult allocateFunding(vFunding fund)
         {
-            if(_service.AllocateFunding(fund))
+            Dictionary<bool,string> dict =_service.AllocateFunding(fund);
+            if(dict.ContainsKey(true))
             {
-                return Ok("Funding Succesful");
+                return Ok(dict[true]);
             }
             else
             {
-                return BadRequest("allocation failed");
+                return BadRequest(dict[false]);
             }
             
 
