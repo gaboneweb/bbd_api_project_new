@@ -44,25 +44,31 @@ namespace UkukhulaAPI.Data.Services
             foreach (var student in studentsInUniversity)
             {
                 var departmentName = new DepartmentService(_context).GetDepartmentNameByDepartmentId(student.DepartmentId);
-                var studentApplication = _context.StudentBursaryApplication.FirstOrDefault(n => n.StudentId == student.StudentId);
 
-                if (studentApplication != null ) 
+                if (!departmentBursaryClaimedDict.ContainsKey(departmentName))
                 {
-                    if (studentApplication.StatusId == 2)
+                    departmentBursaryClaimedDict.Add(departmentName, 0);
+                }
+
+                var studentApplication = _context.StudentBursaryApplication.Where(n => n.StudentId == student.StudentId);
+
+                var currentStudentApplication = studentApplication.FirstOrDefault(n => n.BursaryDetailsId == DateTime.Now.Year);
+
+
+                if (currentStudentApplication != null ) 
+                {
+                    if (currentStudentApplication.StatusId == 2)
                     {
-
-
-                        if (departmentBursaryClaimedDict.ContainsKey(departmentName))
+                        if (departmentBursaryClaimedDict.TryGetValue(departmentName, out decimal currentClaimedBursary))
                         {
-                            var currentAmount = departmentBursaryClaimedDict[departmentName];
-                            departmentBursaryClaimedDict[departmentName] = currentAmount + studentApplication.BursaryAmount;
-                        } else
-                        {
-                            departmentBursaryClaimedDict[departmentName] = studentApplication.BursaryAmount;
+                            departmentBursaryClaimedDict[departmentName] = currentClaimedBursary + currentStudentApplication.BursaryAmount;
                         }
-                    } else
-                    {
-                        departmentBursaryClaimedDict[departmentName] = studentApplication.BursaryAmount;
+                        else
+                        {
+                            departmentBursaryClaimedDict.Add(departmentName, currentStudentApplication.BursaryAmount);
+                        }
+
+
                     }
                 }
             }
