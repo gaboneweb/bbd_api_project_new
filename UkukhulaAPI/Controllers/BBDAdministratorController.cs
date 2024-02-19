@@ -16,6 +16,15 @@ namespace UkukhulaAPI.Controllers
             _service = service;
         }
         [HttpPost]
+        [Route("bbd-admin/addAdmin")]
+        public IActionResult addNewAdmin(BbdadministratorVm bbdadministratorVm){
+            if(_service.addBBDAdmin(bbdadministratorVm)){
+                return Ok("Admin "+ bbdadministratorVm.FirstName + ' '+ bbdadministratorVm.LastName + " has been added");
+            }else{
+                return BadRequest("Failed to add Admin");
+            }
+        }
+        [HttpPost]
         [Route("bbd-admin/fund")]
         public IActionResult allocateFunding(vFunding fund)
         {
