@@ -23,7 +23,7 @@ namespace UkukhulaAPI.Data.Services
 
             };
             _context.Add(_contact);
-            _context.SaveChanges();
+            //_context.SaveChanges();
 
             var _user = new User()
             {
@@ -33,18 +33,25 @@ namespace UkukhulaAPI.Data.Services
                 ContactId = _contact.ContactId
             };
             _context.Add(_user);
-            _context.SaveChanges();
+            //_context.SaveChanges();
 
-            var _headOfDepartment = new HeadOfDepartment()
+            try
             {
-                // find department
-                DepartmentId = new DepartmentService(_context).GetDepartmentIdByDepartmentName(headOfDepartment.DepartmentName),
-                // find university
-                UniversityId = new UniversityService(_context).GetUniversityIdByUniversityName(headOfDepartment.UniversityName),
-                UserId = _user.UserId
-            };
-            _context.Add(_headOfDepartment);
-            _context.SaveChanges(); 
+                var _headOfDepartment = new HeadOfDepartment()
+                {
+                    // find department
+                    DepartmentId = new DepartmentService(_context).GetDepartmentIdByDepartmentName(headOfDepartment.DepartmentName),
+                    // find university
+                    UniversityId = new UniversityService(_context).GetUniversityIdByUniversityName(headOfDepartment.UniversityName),
+                    UserId = _user.UserId
+                };
+                _context.Add(_headOfDepartment);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
 
         }
     }

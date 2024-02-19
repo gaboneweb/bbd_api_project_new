@@ -56,13 +56,23 @@ namespace UkukhulaAPI.Data.Services
         public int GetStatusIdByStatus(string status)
         {
             var _status = _context.ApplicationStatus.FirstOrDefault(n => n.Status == status);
-            return _status.StatusId;
+            if (_status != null)
+            {
+                return _status.StatusId;
+            }
+
+            return 0;
         }
 
         public string GetStatusByStatusId(int statusId)
         {
             var _status = _context.ApplicationStatus.FirstOrDefault(n => n.StatusId == statusId);
-            return _status.Status;
+            if (_status != null)
+            {
+                return _status.Status;
+            }
+
+            return "";
         }
     }
 }
