@@ -22,7 +22,7 @@ public partial class HeadOfDepartmentVM
     public string ContactNumber { get; set; }
     
     
-    [RegularExpression(@"^\\S+@\\S+\\.\\S+$", ErrorMessage = "Invalid email format")]
+    [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$", ErrorMessage = "Invalid email format")]
     public string Email { get; set; }
 
     [Required(ErrorMessage = "Please enter department name")]
