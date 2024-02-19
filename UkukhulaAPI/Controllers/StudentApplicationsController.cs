@@ -49,7 +49,7 @@ namespace UkukhulaAPI.Controllers
         }
 
 
-        [HttpPost(Name = "applicationRejectOrApproval")]
+        [HttpPost("application-reject-or-approval")]
         public IActionResult DecideStudentApplication([FromBody] ApplicationRequest request)
         {
             if (request.ApplicationID != null && request.Approve != null && request.Comment != null)

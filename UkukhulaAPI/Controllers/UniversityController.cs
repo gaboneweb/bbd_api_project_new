@@ -36,7 +36,7 @@ namespace UkukhulaAPI.Controllers
         }
 
 
-        [HttpGet("{universityId}")]
+        [HttpGet("money-spent-by-id/{universityId}")]
         public ActionResult<ViewYearlyUniversityAllocation> GetMoneySpendForUniversityInEachYear( int universityId)
         {
 
