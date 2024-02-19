@@ -76,5 +76,24 @@ namespace UkukhulaAPI.Data.Services
 
             return _universityStatus;
         }
+
+
+        public int ChangeStatusOfUniversityApplication(int applicationID, bool approve, string Comment)
+        {
+            UniversityApplication? currentApplication = _context.UniversityApplications.FirstOrDefault(application => application.UniversityApplicationId == applicationID);
+            ApplicationStatus? status = (approve) ? _context.ApplicationStatuses.FirstOrDefault(status => status.Status.Equals("Accepted"))
+                                        : _context.ApplicationStatuses.FirstOrDefault(status => status.Status.Equals("Rejected"));
+            if (currentApplication != null && status != null)
+            {
+                Console.WriteLine("I am here");
+                currentApplication.StatusId = status.StatusId;
+                currentApplication.ReviewerComment = Comment;
+
+                return _context.SaveChanges();
+
+            }
+            return 0;
+
+        }
     }
 }
