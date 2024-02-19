@@ -27,7 +27,7 @@ public class UniversityApplicationVM
     [RegularExpression(@"^\d{10}$", ErrorMessage = "Contact number must be exactly 10 digits and contain only digits.")]
     public string ContactNumber { get; set; }
     
-    [RegularExpression(@"^\\S+@\\S+\\.\\S+$", ErrorMessage = "Invalid email format")]
+    [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$", ErrorMessage = "Invalid email format")]
     public string Email { get; set; }
 
     [Required(ErrorMessage = "Please enter university name")]
