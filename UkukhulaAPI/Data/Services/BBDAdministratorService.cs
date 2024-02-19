@@ -18,8 +18,39 @@ namespace UkukhulaAPI.Data.Services
         {
             _context = context;
         }
-        public void addUniversityApllication(UniversityApplication universityApplication)
+        public bool addBBDAdmin([FromBody]BbdadministratorVm bbdadministratorVm)
         {
+            try{
+                var contactInfo = new Contact()
+            {
+                Email= bbdadministratorVm.contact.Email,
+                ContactNumber = bbdadministratorVm.contact.ContactNumber
+            };
+             _context.Add(contactInfo);
+            _context.SaveChanges();
+            int contactID = contactInfo.ContactId;
+            var applicantInfo = new User()
+                    {
+                        FirstName = bbdadministratorVm.FirstName,
+                        LastName = bbdadministratorVm.LastName,
+                        Idnumber = bbdadministratorVm.Idnumber,
+                        ContactId = contactID
+                    };
+                    _context.Add(applicantInfo);
+                    _context.SaveChanges();
+            var bbdAdmin = new Bbdadministrator()
+            {
+                UserId= applicantInfo.UserId,
+                User = applicantInfo 
+            };
+            _context.Add(bbdAdmin);
+             _context.SaveChanges();
+            } catch(Exception){
+                return false;
+            }
+            return true;
+            
+
 
         }
         public bool AllocateFunding([FromBody] vFunding funding)
