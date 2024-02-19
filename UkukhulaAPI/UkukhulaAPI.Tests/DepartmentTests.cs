@@ -1,4 +1,3 @@
-using Xunit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UkukhulaAPI.Controllers;

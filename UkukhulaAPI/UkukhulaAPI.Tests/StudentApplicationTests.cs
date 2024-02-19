@@ -5,6 +5,7 @@ using UkukhulaAPI.Controllers;
 using UkukhulaAPI.Controllers.Request;
 using UkukhulaAPI.Data.Services;
 using UkukhulaAPI.Data.Models.View;
+using AutoMapper;
 
 namespace UkukhulaAPI.Tests.Controllers
 {
@@ -14,8 +15,8 @@ namespace UkukhulaAPI.Tests.Controllers
         public void InsertStudentApplication_ValidRequest_ReturnsOkResult()
         {
 
-            var mockService = new Mock<ApplicationsService>();
-            var controller = new StudentApplicationController(mockService.Object);
+            var mockService = new Mock<ApplicationService>();
+            var controller = new StudentApplicationsController(mockService.Object,new Mock<IMapper>().Object);
 
             var user = new StudentRegistrationVm
             {
@@ -50,8 +51,8 @@ namespace UkukhulaAPI.Tests.Controllers
         public void InsertStudentApplication_NullRequest_ReturnsBadRequest()
         {
             // Arrange
-            var mockService = new Mock<ApplicationsService>();
-            var controller = new StudentApplicationController(mockService.Object);
+            var mockService = new Mock<ApplicationService>();
+            var controller = new StudentApplicationsController(mockService.Object,new Mock<IMapper>().Object);
 
             // Act
             var result = controller.insertStudentApplication(null);
