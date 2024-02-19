@@ -1,3 +1,9 @@
+
+using Microsoft.AspNetCore.Http;
+using UkukhulaAPI.Data.Models.View;
+using UkukhulaAPI.Data;
+using UkukhulaAPI.Controllers;
+
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using UkukhulaAPI.Data.Models.ViewModels;
@@ -14,7 +20,13 @@ namespace UkukhulaAPI.Controllers
         {
             _service = service;
         }
-
+        
+        [HttpGet("list-department-bursary-claimed/{universityName}")]
+        public IActionResult GetListDepartmentBursaryClaimedByUniversityName(string universityName)
+        {
+            var departmentBursaryClaimed = _service.GetListDepartmentBursaryClaimedByUniversityName(universityName);
+            return Ok(departmentBursaryClaimed);
+        }
 
 
         [HttpGet("{universityId}")]
@@ -54,5 +66,6 @@ namespace UkukhulaAPI.Controllers
         {
             return View();
         }
+
     }
 }
