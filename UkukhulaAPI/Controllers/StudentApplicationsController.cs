@@ -51,19 +51,20 @@ namespace UkukhulaAPI.Controllers
 
         [HttpPost("application-reject-or-approval")]
         public IActionResult DecideStudentApplication([FromBody] ApplicationRequest request)
-        {
+        {    
+
+            
             if (request.ApplicationID != null && request.Approve != null && request.Comment != null)
             {
                 int entriesUpdated = applicationService.ChangeStatusOfStudentApplication((int)request.ApplicationID, (bool)request.Approve, (string)request.Comment);
                 if (entriesUpdated > 0)
                 {
                     return Ok();
+                }else if(entriesUpdated < 0)
+                {
+                    return BadRequest("There is not more allocation money left for student");
                 }
-                return BadRequest();
-
-            }
-            else if (request.Comment == null)
-            {
+                return BadRequest("Action was unsuccessful");
 
             }
             return BadRequest();

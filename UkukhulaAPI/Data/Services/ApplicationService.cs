@@ -18,11 +18,27 @@ namespace UkukhulaAPI.Data.Services
 
         public int ChangeStatusOfStudentApplication(int applicationID,bool approve,string Comment)
         {
+
+            UniversityService university = new UniversityService(_context);
+
             StudentBursaryApplication? currentApplication = _context.StudentBursaryApplications.FirstOrDefault(application => application.ApplicationId == applicationID);
             ApplicationStatus? status = (approve) ? _context.ApplicationStatuses.FirstOrDefault(status => status.Status.Equals("Accepted"))
                                         : _context.ApplicationStatuses.FirstOrDefault(status => status.Status.Equals("Rejected"));
+            
+
+
             if (currentApplication != null && status != null)
             {
+
+                YearlyUniversityAllocation? universityAllocation = university.GetUniversityAllocationInYear(currentApplication.Student.UniversityId, currentApplication.BursaryDetailsId);
+                decimal allocatedAmount = universityAllocation == null ? 0 : universityAllocation.AllocatedAmount;
+                decimal moneySpent = university.GetMoneySpentForAUniversity(currentApplication.Student.UniversityId, currentApplication.BursaryDetailsId);
+
+                //Check if all the money has been spent,return -1
+                if(allocatedAmount - moneySpent < currentApplication.BursaryAmount)
+                {
+                    return -1;
+                }
                 currentApplication.StatusId = status.StatusId ;
                 currentApplication.ApplicationRejectionReason = Comment;
 
