@@ -40,6 +40,7 @@ namespace UkukhulaAPI.Data.Services
 
 
             var _newBudget = _context.YearlyBursaryDetails.FirstOrDefault(e => e.BursaryDetailsId == DateTime.Now.Year);
+
             if (_newBudget == null)
             {
                 var yearBudget = new YearlyBursaryDetail()
@@ -83,6 +84,28 @@ namespace UkukhulaAPI.Data.Services
             _context.SaveChanges();
             return true;
         }
+        public List<University> getAllUniversities(){
+            List<University> universities = _context.Universities.ToList();
+            return universities;
+        }
+        public decimal GetMoneySpentForAUniversity(int univeristyId,int year)
+        {
+            ApplicationService service = new ApplicationService(_context);
+
+            List<StudentBursaryApplication> applications = service.GetApplicationForUniversityInYear(univeristyId, year, "Accepted");
+
+            decimal sum = 0;
+
+            foreach(var  application in applications) {
+                sum += application.BursaryAmount;
+            }
+
+
+            return sum;
+            
+        }
 
     }
+
+    
 }

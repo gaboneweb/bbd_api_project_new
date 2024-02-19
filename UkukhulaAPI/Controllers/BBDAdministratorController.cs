@@ -1,6 +1,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using UkukhulaAPI.Data;
+using UkukhulaAPI.Data.Models;
 using UkukhulaAPI.Data.Models.ViewModels;
 using UkukhulaAPI.Data.Services;
 
@@ -20,7 +21,7 @@ namespace UkukhulaAPI.Controllers
         {
             if(_service.AllocateFunding(fund))
             {
-                return Ok();
+                return Ok("Funding Succesful");
             }
             else
             {
@@ -29,6 +30,29 @@ namespace UkukhulaAPI.Controllers
             
 
             // return Ok (_ukukhulaContext.Bbdadministrators.ToArray());
+        }
+
+        [HttpGet]
+        [Route("bbd-admin/view-universities-all-time")]
+
+        public IActionResult getAllAllocated(){
+            Dictionary<String,decimal> universitiesByAllocatedAmount =[];
+                
+
+                foreach(University university in _service.getAllUniversities()){
+                    for(int year=2022;year<2032;year++){
+                        if( universitiesByAllocatedAmount.ContainsKey(university.UniversityName)){
+                            universitiesByAllocatedAmount[university.UniversityName] += _service.GetMoneySpentForAUniversity(university.UniversityId,year);
+                        }
+                        else{
+                            universitiesByAllocatedAmount[university.UniversityName] = _service.GetMoneySpentForAUniversity(university.UniversityId,year);
+                        }
+
+                    }
+                }
+            
+
+            return Ok(universitiesByAllocatedAmount);
         }
     }
 }
