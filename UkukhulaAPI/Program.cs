@@ -45,6 +45,7 @@ builder.Services.AddTransient<ApplicationService>();
 
 builder.Services.AddTransient<UniversityApplicationService>();
 builder.Services.AddTransient<HeadOfDepartmentService>();
+builder.Services.AddTransient<UniversityService>();
 
 
 

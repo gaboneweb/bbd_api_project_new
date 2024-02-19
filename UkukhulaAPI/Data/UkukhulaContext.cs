@@ -36,8 +36,10 @@ public partial class UkukhulaContext : DbContext
     public virtual DbSet<Race> Races { get; set; }
 
     public virtual DbSet<Student> Students { get; set; }
+    public virtual DbSet<Student> Student { get; set; }
 
     public virtual DbSet<StudentBursaryApplication> StudentBursaryApplications { get; set; }
+    public virtual DbSet<StudentBursaryApplication> StudentBursaryApplication { get; set; }
 
     public virtual DbSet<StudentBursaryDocument> StudentBursaryDocuments { get; set; }
 

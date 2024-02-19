@@ -20,5 +20,11 @@ namespace UkukhulaAPI.Data.Services
             var department = _context.Department.FirstOrDefault(n => n.DepartmentName == departmentName);
             return department.DepartmentId;
         }
+
+        public string GetDepartmentNameByDepartmentId(int departmentId)
+        {
+            var department = _context.Department.FirstOrDefault(n => n.DepartmentId == departmentId);
+            return department.DepartmentName;
+        }
     }
 }
