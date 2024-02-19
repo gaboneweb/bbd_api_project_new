@@ -1,12 +1,8 @@
 
 using UkukhulaAPI.Data.Models;
-using UkukhulaAPI.Data.Models.ViewModels;
 using UkukhulaAPI.Data.Models.View;
-using System.Collections.Generic;
-using System;
 
 using Microsoft.EntityFrameworkCore;
-using UkukhulaAPI.Data.Models;
 
 
 namespace UkukhulaAPI.Data.Services

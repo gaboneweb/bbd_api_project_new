@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations;
 
 
 namespace UkukhulaAPI.Data.Models.View;
