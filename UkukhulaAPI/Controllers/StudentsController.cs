@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using UkukhulaAPI.Data;
 using UkukhulaAPI.Data.Models;
 using UkukhulaAPI.Data.Models.ViewModels;
+using UkukhulaAPI.Data.Services;
 
 namespace UkukhulaAPI.Controllers
 {
@@ -16,13 +17,13 @@ namespace UkukhulaAPI.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly UkukhulaContext _context;
+        private readonly StudentService studentService;
 
         private readonly IMapper _mapper;
 
-        public StudentsController(UkukhulaContext context,IMapper mapper)
+        public StudentsController(StudentService studentService,IMapper mapper)
         {
-            _context = context;
+            this.studentService = studentService;
             _mapper = mapper;
         }
 
@@ -32,7 +33,7 @@ namespace UkukhulaAPI.Controllers
         {
 
             List<ViewStudent>  vStudents = new List<ViewStudent>(); ;
-            foreach(var vStudent in _context.Students.Include(stud => stud.StudentBursaryDocument).Include(stud => stud.University).ToList())
+            foreach(var vStudent in studentService.GetStudents())
             {
                 vStudents.Add(_mapper.Map<ViewStudent>(vStudent));
             }
@@ -43,7 +44,7 @@ namespace UkukhulaAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult<ViewStudent> GetStudent(int id)
         {
-            var student = _context.Students.Find(id);
+            var student = studentService.GetStudentById(id);
 
             if (student == null)
             {
