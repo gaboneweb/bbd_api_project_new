@@ -37,10 +37,16 @@ var connectionString = builder.Configuration.GetConnectionString("DBConnectionSt
 builder.Services.AddDbContext<UkukhulaContext>(x => x.UseSqlServer(connectionString));
 
 builder.Services.AddTransient<UsersService>();
-builder.Services.AddTransient<ApplicationsService>();
+builder.Services.AddTransient<NewApplicationService>();
+builder.Services.AddTransient<BbdadministratorService>();
 
 
 builder.Services.AddTransient<ApplicationService>();
+
+builder.Services.AddTransient<StudentService>();
+
+
+builder.Services.AddTransient<UniversityService>();
 
 
 

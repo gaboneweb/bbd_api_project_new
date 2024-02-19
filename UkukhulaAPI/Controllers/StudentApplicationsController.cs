@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using UkukhulaAPI.Controllers.Request;
 using UkukhulaAPI.Data;
 using UkukhulaAPI.Data.Models;
 using UkukhulaAPI.Data.Models.ViewModels;
@@ -87,7 +88,55 @@ namespace UkukhulaAPI.Controllers
             }
             return NotFound();
         }
+
+        [HttpGet("{universityId}/{yearOfBursary}/{status}")]
+        public ActionResult<ViewStudentApplication> GetApplicationsByStatus(int universityId,int yearOfBursary,string status)
+        {
+            List<ViewStudentApplication> vStudents = new List<ViewStudentApplication>(); ;
+            foreach (var StudentApp in applicationService.GetApplicationForUniversityInYear(universityId,yearOfBursary,status))
+            {
+                var studentApplication = _mapper.Map<ViewStudentApplication>(StudentApp);
+                studentApplication.ApplicationStatus = new ViewApplicationStatus();
+                studentApplication.ApplicationStatus.StatusId = StudentApp.StatusId;
+                studentApplication.ApplicationStatus.Status = StudentApp.Status.Status;
+                vStudents.Add(studentApplication);
+            }
+
+            return Ok(vStudents);
+
+        }
+
+
+        [HttpPost]
+        [Route("new/student-application")]
+        public IActionResult insertStudentApplication([FromBody] AddStudentApplicationRequest addStudentApplicationRequest)
+        {
+
+            if (addStudentApplicationRequest != null)
+            {
+                applicationService.InsertStudentApplication(addStudentApplicationRequest);
+            }
+
+            return Ok();
+
+        }
+        [HttpPost]
+        [Route("/student-application-update")]
+        public IActionResult UpdateStudentApplication([FromBody] UpdateStudentApplicationRequest updateStudent)
+        {
+
+            if (updateStudent != null)
+            {
+                applicationService.updateStudentApplication(updateStudent);
+            }
+
+            return Ok();
+
+        }
     }
+
+
+
 
 
     public class ApplicationRequest
