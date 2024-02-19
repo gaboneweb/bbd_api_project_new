@@ -28,7 +28,7 @@ public partial class Student
 
     //public virtual University University { get; set; } = null!;
 
-     public virtual University? University { get; set; }
+    //  public virtual University? University { get; set; }
 
 
     public virtual User User { get; set; } = null!;

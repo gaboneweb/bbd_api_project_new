@@ -5,31 +5,31 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using UkukhulaAPI.Data.Services;
 using UkukhulaAPI.Data;
-//using Microsoft.AspNetCore.Mvc;
+
 using UkukhulaAPI.Controllers.Request;
 
 
 namespace UkukhulaAPI;
-  [Route("api/[controller]")]
-    [ApiController]
-public class StudentApplicationController: ControllerBase
+[Route("api/[controller]")]
+[ApiController]
+public class StudentApplicationController : ControllerBase
 {
 
-    private readonly ApplicationsService _service;
+    private readonly NewApplicationService _service;
 
-    
-   
-    public StudentApplicationController(ApplicationsService service)
+
+
+    public StudentApplicationController(NewApplicationService service)
     {
         _service = service;
     }
 
     [HttpPost]
-    [Route("HOD/student-application")]
-    public IActionResult insertStudentApplication([FromBody]AddStudentApplicationRequest addStudentApplicationRequest)
+    [Route("new/student-application")]
+    public IActionResult insertStudentApplication([FromBody] AddStudentApplicationRequest addStudentApplicationRequest)
     {
 
-        if(addStudentApplicationRequest!=null)
+        if (addStudentApplicationRequest != null)
         {
             _service.InsertStudentApplication(addStudentApplicationRequest);
         }
@@ -37,5 +37,19 @@ public class StudentApplicationController: ControllerBase
         return Ok();
 
     }
+    [HttpPost]
+    [Route("/student-application-update")]
+    public IActionResult UpdateStudentApplication([FromBody] UpdateStudentApplicationRequest updateStudent)
+    {
+
+        if (updateStudent != null)
+        {
+            _service.updateStudentApplication(updateStudent);
+        }
+
+        return Ok();
+
+    }
+
 
 }

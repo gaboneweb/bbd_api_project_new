@@ -1,6 +1,8 @@
 
 using Microsoft.AspNetCore.Mvc;
 using UkukhulaAPI.Data;
+using UkukhulaAPI.Data.Models.ViewModels;
+using UkukhulaAPI.Data.Services;
 
 namespace UkukhulaAPI.Controllers
 {
@@ -8,14 +10,25 @@ namespace UkukhulaAPI.Controllers
     [Route("[controller]")]
     public class Bbdadministrator: ControllerBase
     {
-        UkukhulaContext _ukukhulaContext;
-        public Bbdadministrator(UkukhulaContext ukukhulaContext){
-            _ukukhulaContext = ukukhulaContext;
+        BbdadministratorService _service;
+        public Bbdadministrator(BbdadministratorService service){
+            _service = service;
         }
-        [HttpGet]
-        public IActionResult getBBDAdmin()
+        [HttpPost]
+        [Route("bbd-admin/fund")]
+        public IActionResult allocateFunding(vFunding fund)
         {
-            return Ok (_ukukhulaContext.Bbdadministrators.ToArray());
+            if(_service.AllocateFunding(fund))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest("allocation failed");
+            }
+            
+
+            // return Ok (_ukukhulaContext.Bbdadministrators.ToArray());
         }
     }
 }
