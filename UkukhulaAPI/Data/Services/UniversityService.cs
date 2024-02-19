@@ -32,61 +32,72 @@ namespace UkukhulaAPI.Data.Services
             return university.UniversityId;
         }
 
-        public List<DepartmentBursaryClaimedVM> GetListDepartmentBursaryClaimedByUniversityName(String universityName)
+        public List<DepartmentBursaryVM> GetListBursaryAmountPerDepartmentUsingUniNameAndStatus(String universityName, String status)
         {
             var universityId = GetUniversityIdByUniversityName(universityName);
+            int statusId = new ApplicationStatusService(_context).GetStatusIdByStatus(status);
 
 
             var studentsInUniversity = _context.Student.Where(n => n.UniversityId == universityId);
 
-            IDictionary<string, decimal> departmentBursaryClaimedDict = new Dictionary<string, decimal>();
+            IDictionary<string, decimal> departmentBursaryDict = new Dictionary<string, decimal>();
 
             foreach (var student in studentsInUniversity)
             {
-                var departmentName = new DepartmentService(_context).GetDepartmentNameByDepartmentId(student.DepartmentId);
-
-                if (!departmentBursaryClaimedDict.ContainsKey(departmentName))
+                // limit to departments that applied this year 
+                try
                 {
-                    departmentBursaryClaimedDict.Add(departmentName, 0);
-                }
+                    var studentApplication = _context.StudentBursaryApplication.Where(n => n.StudentId == student.StudentId);
 
-                var studentApplication = _context.StudentBursaryApplication.Where(n => n.StudentId == student.StudentId);
-
-                var currentStudentApplication = studentApplication.FirstOrDefault(n => n.BursaryDetailsId == DateTime.Now.Year);
-
-
-                if (currentStudentApplication != null ) 
-                {
-                    if (currentStudentApplication.StatusId == 2)
+                    var currentStudentApplication = studentApplication.FirstOrDefault(n => n.BursaryDetailsId == DateTime.Now.Year);
+                    
+                    if (currentStudentApplication == null)
                     {
-                        if (departmentBursaryClaimedDict.TryGetValue(departmentName, out decimal currentClaimedBursary))
+                        continue;
+                    }
+                    var departmentName = new DepartmentService(_context).GetDepartmentNameByDepartmentId(student.DepartmentId);
+
+                    if (!departmentBursaryDict.ContainsKey(departmentName))
+                    {
+                        departmentBursaryDict.Add(departmentName, 0);
+                    }
+
+
+
+                    if (currentStudentApplication.StatusId == statusId)
+                    {
+                        if (departmentBursaryDict.TryGetValue(departmentName, out decimal currentBursary))
                         {
-                            departmentBursaryClaimedDict[departmentName] = currentClaimedBursary + currentStudentApplication.BursaryAmount;
+                            departmentBursaryDict[departmentName] = currentBursary + currentStudentApplication.BursaryAmount;
                         }
                         else
                         {
-                            departmentBursaryClaimedDict.Add(departmentName, currentStudentApplication.BursaryAmount);
+                            departmentBursaryDict.Add(departmentName, currentStudentApplication.BursaryAmount);
                         }
 
 
                     }
+                    
+                } catch (Exception ex)
+                {
+                    continue;
                 }
             }
 
-            List<DepartmentBursaryClaimedVM> departmentBursaryClaimed = new List<DepartmentBursaryClaimedVM>();
+            List<DepartmentBursaryVM> departmentBursaryList = new List<DepartmentBursaryVM>();
 
-            foreach (var departmentBursary in departmentBursaryClaimedDict )
+            foreach (var departmentBursary in departmentBursaryDict )
             {
-                var _departmentBursaryClaimed = new DepartmentBursaryClaimedVM()
+                var _departmentBursary = new DepartmentBursaryVM()
                 {
                     DepartmentName = departmentBursary.Key,
-                    BursaryClaimed = departmentBursary.Value
+                    Bursary = departmentBursary.Value
                 };
 
-                departmentBursaryClaimed.Add(_departmentBursaryClaimed);
+                departmentBursaryList.Add(_departmentBursary);
             }
 
-            return departmentBursaryClaimed;
+            return departmentBursaryList;
 
 
 

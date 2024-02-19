@@ -21,10 +21,10 @@ namespace UkukhulaAPI.Controllers
             _service = service;
         }
         
-        [HttpGet("list-department-bursary-claimed/{universityName}")]
-        public IActionResult GetListDepartmentBursaryClaimedByUniversityName(string universityName)
+        [HttpGet("list-department-bursary-status/{universityName}/{status}")]
+        public IActionResult GetListBursaryAmountPerDepartmentUsingUniNameAndStatus(String universityName, String status)
         {
-            var departmentBursaryClaimed = _service.GetListDepartmentBursaryClaimedByUniversityName(universityName);
+            var departmentBursaryClaimed = _service.GetListBursaryAmountPerDepartmentUsingUniNameAndStatus(universityName, status);
             return Ok(departmentBursaryClaimed);
         }
 

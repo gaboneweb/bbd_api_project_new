@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace UkukhulaAPI.Data.Models.View;
 
-public class DepartmentBursaryClaimedVM
+public class DepartmentBursaryVM
 {
 
     public string DepartmentName { get; set; }
-    public decimal BursaryClaimed { get; set; }
+    public decimal Bursary { get; set; }
 
 
 }
