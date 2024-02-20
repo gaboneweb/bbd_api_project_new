@@ -7,7 +7,7 @@ using UkukhulaAPI.Data;
 // ...
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class DepartmentController : ControllerBase
 {
     private readonly UkukhulaContext _ukukhulaContext;

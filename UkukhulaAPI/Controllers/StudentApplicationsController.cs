@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 using UkukhulaAPI.Controllers.Request;
-using UkukhulaAPI.Data;
-using UkukhulaAPI.Data.Models;
+
 using UkukhulaAPI.Data.Models.ViewModels;
 using UkukhulaAPI.Data.Services;
 
@@ -94,7 +90,7 @@ namespace UkukhulaAPI.Controllers
             return NotFound();
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles ="Admin,HOD")]
         [HttpGet("{universityId}/{yearOfBursary}/{status}")]
         public ActionResult<ViewStudentApplication> GetApplicationsByStatus(int universityId,int yearOfBursary,string status)
         {
@@ -114,7 +110,7 @@ namespace UkukhulaAPI.Controllers
 
         [Authorize(Roles ="HOD")]
         [HttpPost]
-        [Route("new/student-application")]
+        [Route("student-application")]
         public IActionResult insertStudentApplication([FromBody] AddStudentApplicationRequest addStudentApplicationRequest)
         {
 
@@ -128,7 +124,7 @@ namespace UkukhulaAPI.Controllers
         }
         [Authorize(Roles ="HOD")]
         [HttpPost]
-        [Route("/student-application-update")]
+        [Route("student-application-update")]
         public IActionResult UpdateStudentApplication([FromBody] UpdateStudentApplicationRequest updateStudent)
         {
 

@@ -8,7 +8,7 @@ using UkukhulaAPI.Data;
 
 [Authorize(Roles ="Admin")]
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class HODController : ControllerBase
 {
     private readonly UkukhulaContext _ukukhulaContext;
