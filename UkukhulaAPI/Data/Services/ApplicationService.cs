@@ -27,24 +27,24 @@ namespace UkukhulaAPI.Data.Services
             
 
 
-            if (currentApplication != null && status != null)
-            {
+            // if (currentApplication != null && status != null)
+            // {
 
-                YearlyUniversityAllocation? universityAllocation = university.GetUniversityAllocationInYear(currentApplication.Student.UniversityId, currentApplication.BursaryDetailsId);
-                decimal allocatedAmount = universityAllocation == null ? 0 : universityAllocation.AllocatedAmount;
-                decimal moneySpent = university.GetMoneySpentForAUniversity(currentApplication.Student.UniversityId, currentApplication.BursaryDetailsId);
+            //     YearlyUniversityAllocation? universityAllocation = university.GetUniversityAllocationInYear(currentApplication.Student.UniversityId, currentApplication.BursaryDetailsId);
+            //     decimal allocatedAmount = universityAllocation == null ? 0 : universityAllocation.AllocatedAmount;
+            //     decimal moneySpent = university.GetMoneySpentForAUniversity(currentApplication.Student.UniversityId, currentApplication.BursaryDetailsId);
 
-                //Check if all the money has been spent,return -1
-                if(allocatedAmount - moneySpent < currentApplication.BursaryAmount)
-                {
-                    return -1;
-                }
-                currentApplication.StatusId = status.StatusId ;
-                currentApplication.ApplicationRejectionReason = Comment;
+            //     //Check if all the money has been spent,return -1
+            //     if(allocatedAmount - moneySpent < currentApplication.BursaryAmount)
+            //     {
+            //         return -1;
+            //     }
+            //     currentApplication.StatusId = status.StatusId ;
+            //     currentApplication.ApplicationRejectionReason = Comment;
 
-                return _context.SaveChanges();
+            //     return _context.SaveChanges();
                 
-            }
+            // }
             return 0;
             
         }

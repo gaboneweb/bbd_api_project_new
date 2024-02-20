@@ -76,29 +76,33 @@ public class UsersService : IDisposable
         }
 
     }
-      public string FindUserRole(LoginVm currentUsern)
-{
-    var _context = new UkukhulaContext();
-    var user = _context.Users.FirstOrDefault(e => e.Idnumber == currentUsern.Username);
-
-    if (user != null)
+    public string FindUserRole(LoginVm currentUsern)
     {
-        var isAdmin = _context.Bbdadministrators.Any(a => a.UserId == user.UserId);
+        var _context = new UkukhulaContext();
+        var user = _context.Users.FirstOrDefault(e => e.Idnumber == currentUsern.Username);
 
-        if (isAdmin)
+        if (user != null)
         {
-            return "Admin";
+            var isAdmin = _context.Bbdadministrators.Any(a => a.UserId == user.UserId);
+
+            if (isAdmin)
+            {
+                return "Admin";
+            }
+
+            var isHod = _context.HeadOfDepartments.Any(h => h.UserId == user.UserId);
+
+            if (isHod)
+            {
+                return "HOD";
+            }
+            
+            return "Student";
         }
-
-        var isHod = _context.HeadOfDepartments.Any(h => h.UserId == user.UserId);
-
-        if (isHod)
+        else
         {
-            return "HOD";
+             return "UnknownUser";
         }
-        return "User";
     }
-    return null;
-}
 
 }

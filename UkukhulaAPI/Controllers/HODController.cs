@@ -1,11 +1,12 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using UkukhulaAPI.Data;
 
 
 // ...
 
+[Authorize(Roles ="Admin")]
 [ApiController]
 [Route("[controller]")]
 public class HODController : ControllerBase
@@ -16,7 +17,7 @@ public class HODController : ControllerBase
     {
         _ukukhulaContext = ukukhulaContext;
     }
-
+    
     [HttpGet]
     public IActionResult GetUContacts()
     {

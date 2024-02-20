@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UkukhulaAPI.Data;
 using UkukhulaAPI.Data.Models;
@@ -7,6 +8,7 @@ using UkukhulaAPI.Data.Services;
 
 namespace UkukhulaAPI.Controllers
 {
+    [Authorize(Roles ="Admin")]
     [ApiController]
     [Route("[controller]")]
     public class Bbdadministrator: ControllerBase
