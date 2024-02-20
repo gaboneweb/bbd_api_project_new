@@ -20,7 +20,7 @@ namespace UkukhulaAPI.Data.Services.Read
         {
             try
             {
-                var race = _context.Race.FirstOrDefault(n => n.RaceName == raceName);
+                var race = _context.Races.FirstOrDefault(n => n.RaceName == raceName);
                 return race.RaceId;
             } 
             catch (Exception ex)
@@ -33,7 +33,7 @@ namespace UkukhulaAPI.Data.Services.Read
         {
             try
             {
-                var race = _context.Race.FirstOrDefault(n => n.RaceId == raceId);
+                var race = _context.Races.FirstOrDefault(n => n.RaceId == raceId);
                 return race.RaceName;
             } 
             catch (Exception ex)
@@ -45,7 +45,7 @@ namespace UkukhulaAPI.Data.Services.Read
         public List<Race> GetAllRaces()
         {
 
-            return _context.Race.ToList();
+            return _context.Races.ToList();
 
         }
     }

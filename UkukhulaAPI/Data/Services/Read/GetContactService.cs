@@ -19,7 +19,7 @@ namespace UkukhulaAPI.Data.Services.Read
         {
             try
             {
-                var contact = _context.Contact.FirstOrDefault(n => n.ContactId == contactId);
+                var contact = _context.Contacts.FirstOrDefault(n => n.ContactId == contactId);
                 return contact.ContactNumber;
             } 
             catch (Exception ex)
@@ -32,7 +32,7 @@ namespace UkukhulaAPI.Data.Services.Read
         {
             try
             {
-                var contact = _context.Contact.FirstOrDefault(n => n.ContactId == contactId);
+                var contact = _context.Contacts.FirstOrDefault(n => n.ContactId == contactId);
                 return contact.Email;
             }
             catch (Exception ex)
@@ -44,7 +44,7 @@ namespace UkukhulaAPI.Data.Services.Read
         public List<Contact> GetAllContacts()
         {
 
-            return _context.Contact.ToList();
+            return _context.Contacts.ToList();
 
         }
 

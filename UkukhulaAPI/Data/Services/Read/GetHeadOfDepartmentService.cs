@@ -22,7 +22,7 @@ namespace UkukhulaAPI.Data.Services.Read
         {
             try
             {
-                var headOfDepartment = _context.HeadOfDepartment.FirstOrDefault(n => n.HeadOfDepartmentId == headOfDepartmentId);
+                var headOfDepartment = _context.HeadOfDepartments.FirstOrDefault(n => n.HeadOfDepartmentId == headOfDepartmentId);
                 return headOfDepartment.DepartmentId;
             } 
             catch (Exception ex)
@@ -35,7 +35,7 @@ namespace UkukhulaAPI.Data.Services.Read
         {
             try
             {
-                var headOfDepartment = _context.HeadOfDepartment.FirstOrDefault(n => n.HeadOfDepartmentId == headOfDepartmentId);
+                var headOfDepartment = _context.HeadOfDepartments.FirstOrDefault(n => n.HeadOfDepartmentId == headOfDepartmentId);
                 return headOfDepartment.UniversityId;
             } 
             catch (Exception ex)
@@ -48,7 +48,7 @@ namespace UkukhulaAPI.Data.Services.Read
         {
             try
             {
-                var headOfDepartment = _context.HeadOfDepartment.FirstOrDefault(n => n.HeadOfDepartmentId == headOfDepartmentId);
+                var headOfDepartment = _context.HeadOfDepartments.FirstOrDefault(n => n.HeadOfDepartmentId == headOfDepartmentId);
                 return headOfDepartment.UserId;
             } 
             catch (Exception ex)
@@ -60,7 +60,7 @@ namespace UkukhulaAPI.Data.Services.Read
         public List<HeadOfDepartment> GetAllHeadOfDepartments()
         {
 
-            return _context.HeadOfDepartment.ToList();
+            return _context.HeadOfDepartments.ToList();
 
         }
 
