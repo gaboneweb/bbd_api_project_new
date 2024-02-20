@@ -59,9 +59,17 @@ namespace UkukhulaAPI.Data.Services
         public UniversityStatusVM GetUniversityApplicationStatusByUniversityName(string universityName)
         {
             var university = _context.University.FirstOrDefault(n => n.UniversityName == universityName);
+            if (university == null)
+            {
+                return null;
+            }
             var universityId = university.UniversityId;
             
             var universityApplication = _context.UniversityApplication.FirstOrDefault(n => n.UniversityId == universityId);
+            if (universityApplication == null)
+            {
+                return null;
+            }
             var reviewerComment = universityApplication.ReviewerComment;
             var statusId = universityApplication.StatusId;
 

@@ -2,6 +2,7 @@ using UkukhulaAPI.Data.Models;
 using UkukhulaAPI.Data.Models.ViewModels;
 using UkukhulaAPI.Data.Models.View;
 using UkukhulaAPI.Data.Services;
+using UkukhulaAPI.Data.Services.Read;
 
 
 namespace UkukhulaAPI.Data.Services
@@ -35,16 +36,23 @@ namespace UkukhulaAPI.Data.Services
             _context.Add(_user);
             _context.SaveChanges();
 
-            var _headOfDepartment = new HeadOfDepartment()
+            try
             {
-                // find department
-                DepartmentId = new DepartmentService(_context).GetDepartmentIdByDepartmentName(headOfDepartment.DepartmentName),
-                // find university
-                UniversityId = new UniversityService(_context).GetUniversityIdByUniversityName(headOfDepartment.UniversityName),
-                UserId = _user.UserId
-            };
-            _context.Add(_headOfDepartment);
-            _context.SaveChanges(); 
+                var _headOfDepartment = new HeadOfDepartment()
+                {
+                    // find department
+                    DepartmentId = new GetDepartmentService(_context).GetDepartmentIdByDepartmentName(headOfDepartment.DepartmentName),
+                    // find university
+                    UniversityId = new UniversityService(_context).GetUniversityIdByUniversityName(headOfDepartment.UniversityName),
+                    UserId = _user.UserId
+                };
+                _context.Add(_headOfDepartment);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
 
         }
     }

@@ -4,6 +4,10 @@ using UkukhulaAPI.Data.Models.View;
 
 using Microsoft.EntityFrameworkCore;
 
+using UkukhulaAPI.Data.Models;
+using UkukhulaAPI.Data.Services.Read;
+
+
 
 namespace UkukhulaAPI.Data.Services
 {
@@ -21,17 +25,36 @@ namespace UkukhulaAPI.Data.Services
         }
 
 
-
         public int GetUniversityIdByUniversityName(string universityName)
         {
-            var university = _context.University.FirstOrDefault(n => n.UniversityName == universityName);
-            return university.UniversityId;
+            try
+            {
+                var university = _context.University.FirstOrDefault(n => n.UniversityName == universityName);
+                return university.UniversityId;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
 
-        public List<DepartmentBursaryVM> GetListBursaryAmountPerDepartmentUsingUniNameAndStatus(String universityName, String status)
+        public string GetUniversityNameByUniversityId(int universityId)
+        {
+            try
+            {
+                var university = _context.University.FirstOrDefault(n => n.UniversityId == universityId);
+                return university.UniversityName;
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+
+        public List<DepartmentBursaryVM> GetListBursaryAmountPerDepartmentUsingUniNameAndStatus(string universityName, string status)
         {
             var universityId = GetUniversityIdByUniversityName(universityName);
-            int statusId = new ApplicationStatusService(_context).GetStatusIdByStatus(status);
+            int statusId = new GetApplicationStatusService(_context).GetStatusIdByStatus(status);
 
 
             var studentsInUniversity = _context.Student.Where(n => n.UniversityId == universityId);
@@ -51,7 +74,7 @@ namespace UkukhulaAPI.Data.Services
                     {
                         continue;
                     }
-                    var departmentName = new DepartmentService(_context).GetDepartmentNameByDepartmentId(student.DepartmentId);
+                    var departmentName = new GetDepartmentService(_context).GetDepartmentNameByDepartmentId(student.DepartmentId);
 
                     if (!departmentBursaryDict.ContainsKey(departmentName))
                     {
@@ -98,6 +121,49 @@ namespace UkukhulaAPI.Data.Services
 
 
         }
+
+        public List<Dictionary<string, string>> GetListUniversityStudents(string universityName)
+        {
+            StudentInfoService studentInfoService = new StudentInfoService(_context);
+
+            var universityId = GetUniversityIdByUniversityName(universityName);
+
+            var studentsInUniversity = _context.Student.Where(n => n.UniversityId == universityId);
+
+            List<Dictionary<string, string>> studentList = new List<Dictionary<string, string>>();
+
+
+            foreach (var student in studentsInUniversity)
+            {
+                try
+                {
+                    var studentApplication = _context.StudentBursaryApplication.Where(n => n.StudentId == student.StudentId);
+
+                    var currentStudentApplication = studentApplication.FirstOrDefault(n => n.BursaryDetailsId == DateTime.Now.Year);
+
+                    if (currentStudentApplication == null)
+                    {
+                        continue;
+                    }
+
+                    int studentId = student.StudentId;
+
+                    studentList.Add(studentInfoService.GetStudentInfo(studentId));
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    continue;
+                }
+            }
+
+
+            return studentList;
+
+        }
+
 
 
         public List<YearlyUniversityAllocation> GetUniversityAllocation(int univerityId)
