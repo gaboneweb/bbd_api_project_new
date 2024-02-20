@@ -20,7 +20,7 @@ namespace UkukhulaAPI.Data.Services.Read
         {
             try
             {
-                var user = _context.User.FirstOrDefault(n => n.UserId == userId);
+                var user = _context.Users.FirstOrDefault(n => n.UserId == userId);
                 return user.FirstName;
             } 
             catch (Exception ex)
@@ -34,7 +34,7 @@ namespace UkukhulaAPI.Data.Services.Read
         {
             try
             {
-                var user = _context.User.FirstOrDefault(n => n.UserId == userId);
+                var user = _context.Users.FirstOrDefault(n => n.UserId == userId);
                 return user.LastName;
             }
             catch (Exception ex)
@@ -47,7 +47,7 @@ namespace UkukhulaAPI.Data.Services.Read
         {
             try
             {
-                var user = _context.User.FirstOrDefault(n => n.UserId == userId);
+                var user = _context.Users.FirstOrDefault(n => n.UserId == userId);
                 return user.Idnumber;
             }
             catch (Exception ex)
@@ -60,7 +60,7 @@ namespace UkukhulaAPI.Data.Services.Read
         {
             try
             {
-                var user = _context.User.FirstOrDefault(n => n.UserId == userId);
+                var user = _context.Users.FirstOrDefault(n => n.UserId == userId);
                 return user.ContactId;
             }
             catch (Exception ex)
@@ -73,7 +73,7 @@ namespace UkukhulaAPI.Data.Services.Read
         {
             try
             {
-                var user = _context.User.FirstOrDefault(n => n.Idnumber == idNumber);
+                var user = _context.Users.FirstOrDefault(n => n.Idnumber == idNumber);
                 return user.UserId;
             }
             catch (Exception ex)
@@ -85,7 +85,7 @@ namespace UkukhulaAPI.Data.Services.Read
         public List<User> GetAllUsers()
         {
 
-            return _context.User.ToList();
+            return _context.Users.ToList();
 
         }
     }
