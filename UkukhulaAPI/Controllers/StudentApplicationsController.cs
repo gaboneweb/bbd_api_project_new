@@ -49,7 +49,7 @@ namespace UkukhulaAPI.Controllers
 
 
          [Authorize(Roles ="Admin")]
-        [HttpPost("application-reject-or-approval")]
+        [HttpPut("application-reject-or-approval")]
         public IActionResult DecideStudentApplication([FromBody] ApplicationRequest request)
         {    
 
@@ -123,7 +123,7 @@ namespace UkukhulaAPI.Controllers
 
         }
         [Authorize(Roles ="HOD")]
-        [HttpPost]
+        [HttpPut]
         [Route("student-application-update")]
         public IActionResult UpdateStudentApplication([FromBody] UpdateStudentApplicationRequest updateStudent)
         {

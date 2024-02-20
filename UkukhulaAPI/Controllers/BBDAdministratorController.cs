@@ -65,6 +65,27 @@ namespace UkukhulaAPI.Controllers
             
 
             return Ok(universitiesByAllocatedAmount);
+        } [HttpGet]
+        [Route("view-universities-by-year/{Year}")]
+
+        public IActionResult getAllAllocatedByYear(int Year)
+        {
+            Dictionary<String,decimal> universitiesByAllocatedAmount =[];
+                
+
+                foreach(University university in _service.getAllUniversities()){
+                        if( universitiesByAllocatedAmount.ContainsKey(university.UniversityName)){
+                            universitiesByAllocatedAmount[university.UniversityName] += _service.GetMoneySpentForAUniversity(university.UniversityId,Year);
+                        }
+                        else{
+                            universitiesByAllocatedAmount[university.UniversityName] = _service.GetMoneySpentForAUniversity(university.UniversityId,Year);
+                        }
+
+                    
+                }
+            
+
+            return Ok(universitiesByAllocatedAmount);
         }
     }
 }

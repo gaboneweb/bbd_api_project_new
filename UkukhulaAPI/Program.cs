@@ -6,6 +6,9 @@ using UkukhulaAPI.Data.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using UkukhulaAPI.Services;
+using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using UkukhulaAPI.Swagger;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,9 +19,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
     options.TokenValidationParameters = new TokenValidationParameters
