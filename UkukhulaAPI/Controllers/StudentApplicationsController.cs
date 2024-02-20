@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ using UkukhulaAPI.Data.Services;
 
 namespace UkukhulaAPI.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class StudentApplicationsController : ControllerBase
@@ -31,6 +33,7 @@ namespace UkukhulaAPI.Controllers
         }
 
         // GET: api/Applications
+         [Authorize(Roles ="Admin")]
         [HttpGet]
         public ActionResult<ViewStudentApplication> GetStudentBursaryApplications()
         {
@@ -49,6 +52,7 @@ namespace UkukhulaAPI.Controllers
         }
 
 
+         [Authorize(Roles ="Admin")]
         [HttpPost("application-reject-or-approval")]
         public IActionResult DecideStudentApplication([FromBody] ApplicationRequest request)
         {    
@@ -71,7 +75,7 @@ namespace UkukhulaAPI.Controllers
 
         }
 
-
+         [Authorize(Roles ="Admin")]
         [HttpGet("{id}")]
         public IActionResult GetStudentApplicationById(int id)
         {
@@ -90,6 +94,7 @@ namespace UkukhulaAPI.Controllers
             return NotFound();
         }
 
+        [Authorize(Roles ="Admin")]
         [HttpGet("{universityId}/{yearOfBursary}/{status}")]
         public ActionResult<ViewStudentApplication> GetApplicationsByStatus(int universityId,int yearOfBursary,string status)
         {
@@ -107,7 +112,7 @@ namespace UkukhulaAPI.Controllers
 
         }
 
-
+        [Authorize(Roles ="HOD")]
         [HttpPost]
         [Route("new/student-application")]
         public IActionResult insertStudentApplication([FromBody] AddStudentApplicationRequest addStudentApplicationRequest)
@@ -121,6 +126,7 @@ namespace UkukhulaAPI.Controllers
             return Ok();
 
         }
+        [Authorize(Roles ="HOD")]
         [HttpPost]
         [Route("/student-application-update")]
         public IActionResult UpdateStudentApplication([FromBody] UpdateStudentApplicationRequest updateStudent)

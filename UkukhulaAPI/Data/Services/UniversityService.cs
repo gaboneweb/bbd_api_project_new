@@ -108,6 +108,14 @@ namespace UkukhulaAPI.Data.Services
             return yearlyUniversityAllocations;
         }
 
+        public YearlyUniversityAllocation? GetUniversityAllocationInYear(int univerityId,int year)
+        {
+            YearlyUniversityAllocation? yearlyUniversityAllocations = _context.YearlyUniversityAllocations.Include(allocation => allocation.University)
+                                                                                                                .Where(allocation => allocation.UniversityId == univerityId && allocation.BursaryDetailsId == year).FirstOrDefault();
+ 
+            return yearlyUniversityAllocations;
+        }
+
         public decimal GetMoneySpentForAUniversity(int univeristyId,int year)
         {
             ApplicationService service = new ApplicationService(_context);

@@ -20,6 +20,7 @@ namespace UkukhulaAPI.Data.Services
         {
 
             UniversityService university = new UniversityService(_context);
+            
 
             StudentBursaryApplication? currentApplication = _context.StudentBursaryApplications.FirstOrDefault(application => application.ApplicationId == applicationID);
             ApplicationStatus? status = (approve) ? _context.ApplicationStatuses.FirstOrDefault(status => status.Status.Equals("Accepted"))
