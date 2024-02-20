@@ -10,7 +10,7 @@ namespace UkukhulaAPI.Controllers
 {
     [Authorize(Roles ="Admin")]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class Bbdadministrator: ControllerBase
     {
         BbdadministratorService _service;
@@ -18,7 +18,7 @@ namespace UkukhulaAPI.Controllers
             _service = service;
         }
         [HttpPost]
-        [Route("bbd-admin/addAdmin")]
+        [Route("addAdmin")]
         public IActionResult addNewAdmin(BbdadministratorVm bbdadministratorVm){
             if(_service.addBBDAdmin(bbdadministratorVm)){
                 return Ok("Admin "+ bbdadministratorVm.FirstName + ' '+ bbdadministratorVm.LastName + " has been added");
@@ -27,7 +27,7 @@ namespace UkukhulaAPI.Controllers
             }
         }
         [HttpPost]
-        [Route("bbd-admin/fund")]
+        [Route("fund")]
         public IActionResult allocateFunding(vFunding fund)
         {
             Dictionary<bool,string> dict =_service.AllocateFunding(fund);
@@ -45,7 +45,7 @@ namespace UkukhulaAPI.Controllers
         }
 
         [HttpGet]
-        [Route("bbd-admin/view-universities-all-time")]
+        [Route("view-universities-all-time")]
 
         public IActionResult getAllAllocated(){
             Dictionary<String,decimal> universitiesByAllocatedAmount =[];

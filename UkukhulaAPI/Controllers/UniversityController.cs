@@ -1,18 +1,14 @@
 
-using Microsoft.AspNetCore.Http;
-using UkukhulaAPI.Data.Models.View;
-using UkukhulaAPI.Data;
-using UkukhulaAPI.Controllers;
-
-﻿using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Mvc;
 using UkukhulaAPI.Data.Models.ViewModels;
 using UkukhulaAPI.Data.Services;
 
 namespace UkukhulaAPI.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class UniversityController : Controller
-    {   
+    {
 
         private readonly UniversityService _service;
 
@@ -20,7 +16,7 @@ namespace UkukhulaAPI.Controllers
         {
             _service = service;
         }
-        
+
         [HttpGet("list-department-bursary-status/{universityName}/{status}")]
         public IActionResult GetListBursaryAmountPerDepartmentUsingUniNameAndStatus(String universityName, String status)
         {
@@ -30,12 +26,12 @@ namespace UkukhulaAPI.Controllers
 
 
         [HttpGet("money-spent-by-id/{universityId}")]
-        public ActionResult<ViewYearlyUniversityAllocation> GetMoneySpendForUniversityInEachYear( int universityId)
+        public ActionResult<ViewYearlyUniversityAllocation> GetMoneySpendForUniversityInEachYear(int universityId)
         {
 
             List<ViewYearlyUniversityAllocation> universityAllocations = new List<ViewYearlyUniversityAllocation>();
 
-            foreach(var allocation in _service.GetUniversityAllocation(universityId))
+            foreach (var allocation in _service.GetUniversityAllocation(universityId))
             {
                 var yearlyAllocation = new ViewYearlyUniversityAllocation();
 
@@ -53,18 +49,11 @@ namespace UkukhulaAPI.Controllers
 
                 yearlyAllocation.University.UniversityName = allocation.University.UniversityName;
 
-                universityAllocations.Add(yearlyAllocation);    
+                universityAllocations.Add(yearlyAllocation);
 
 
             }
-
-
             return Ok(universityAllocations);
-        }
-
-        public IActionResult Index()
-        {
-            return View();
         }
 
     }

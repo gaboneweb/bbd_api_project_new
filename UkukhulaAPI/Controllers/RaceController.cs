@@ -1,14 +1,12 @@
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using UkukhulaAPI.Data;
 
 
-// ...
 [Authorize(Roles ="Admin")]
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class RaceController : ControllerBase
 {
     private readonly UkukhulaContext _ukukhulaContext;
